@@ -9,7 +9,7 @@ public class TicTacToe implements ActionListener{
 	JFrame frame = new JFrame();
 	JPanel title_panel = new JPanel();
 	JPanel button_panel = new JPanel();
-	JLabel texfield = new JLabel();
+	JLabel textfield = new JLabel();
 	JButton[] buttons = new JButton[9];
 	boolean player1_turn;
 	
@@ -21,12 +21,12 @@ public class TicTacToe implements ActionListener{
 		frame.setLayout(new BorderLayout());
 		frame.setVisible(true);
 		
-		texfield.setBackground(new Color(25, 25, 25));
-		texfield.setForeground(new Color(25, 255, 0));
-		texfield.setFont(new Font("Ink Free", Font.BOLD, 75));
-		texfield.setHorizontalAlignment(JLabel.CENTER);
-		texfield.setText("Tic-Tac-Toe");
-		texfield.setOpaque(true);
+		textfield.setBackground(new Color(25, 25, 25));
+		textfield.setForeground(new Color(25, 255, 0));
+		textfield.setFont(new Font("Ink Free", Font.BOLD, 75));
+		textfield.setHorizontalAlignment(JLabel.CENTER);
+		textfield.setText("Tic-Tac-Toe");
+		textfield.setOpaque(true);
 		
 		title_panel.setLayout(new BorderLayout());
 		title_panel.setBounds(0, 0, 800, 100);
@@ -42,8 +42,8 @@ public class TicTacToe implements ActionListener{
 		}
 		
 		
-		title_panel.add(texfield);
-	//	button_panel.add(texfield);
+		title_panel.add(textfield);
+	//	button_panel.add(textfield);
 		frame.add(title_panel, BorderLayout.NORTH);
 		frame.add(button_panel);
 		
@@ -60,12 +60,13 @@ public class TicTacToe implements ActionListener{
 			if(e.getSource() == buttons[i]) {
 				/*if(player1_turn ) {
 					buttons[i].setText("X");
-					texfield.setText("O turn ");
+					textfield.setText("O turn ");
 					player1_turn = false;  				//aafule sochera code
+													//if not compared to empty string one button can be changed infinte times
 				}
 				else {
 					buttons[i].setText("O");
-					texfield.setText("X turn ");
+					textfield.setText("X turn ");
 					player1_turn = true;
 				}*/
 				if(player1_turn) {
@@ -73,15 +74,17 @@ public class TicTacToe implements ActionListener{
 						buttons[i].setForeground(new Color(255, 0, 0));
 						buttons[i].setText("X");
 						player1_turn = false;
-						texfield.setText("O turn");
+						textfield.setText("O turn");
+						check();
 					}
 				}
 				else {
 					if(buttons[i].getText() == "") {
-						buttons[i].setForeground(new Color(0, 255, 0));
+						buttons[i].setForeground(new Color(0, 0, 255));
 						buttons[i].setText("O");
 						player1_turn = true;
-						texfield.setText("X turn");
+						textfield.setText("X turn");
+						check();
 					}
 				}
 			}
@@ -102,18 +105,155 @@ public class TicTacToe implements ActionListener{
 			
 		}else {
 			player1_turn = false;
-			texfield.setText("O turn ");
+			textfield.setText("O turn ");
 		}
 			
 	}
 	
 	public void check() {
+		//check X wins Condition
+		if(
+				(buttons[0].getText() == "X")&&
+				(buttons[1].getText() == "X")&&
+				(buttons[2].getText() == "X")
+		){
+			xWins(0, 1, 2);
+		}
+		if(
+				(buttons[3].getText() == "X")&&
+				(buttons[4].getText() == "X")&&
+				(buttons[5].getText() == "X")
+		){
+			xWins(3, 4, 5);
+		}
+		if(
+				(buttons[1].getText() == "X")&&
+				(buttons[4].getText() == "X")&&
+				(buttons[7].getText() == "X")
+		){
+			xWins(1, 4, 7);
+		}
+		if(
+				(buttons[2].getText() == "X")&&
+				(buttons[5].getText() == "X")&&
+				(buttons[8].getText() == "X")
+		){
+			xWins(2, 5, 8);
+		}
+		if(
+				(buttons[6].getText() == "X")&&
+				(buttons[7].getText() == "X")&&
+				(buttons[8].getText() == "X")
+		){
+			xWins(6, 7, 8);
+		}
+		if(
+				(buttons[0].getText() == "X")&&
+				(buttons[3].getText() == "X")&&
+				(buttons[6].getText() == "X")
+		){
+			xWins(0, 3, 6);
+		}
+		if(
+				(buttons[0].getText() == "X")&&
+				(buttons[4].getText() == "X")&&
+				(buttons[8].getText() == "X")
+		){
+			xWins(0, 4, 8);
+		}
+		if(
+				(buttons[6].getText() == "X")&&
+				(buttons[4].getText() == "X")&&
+				(buttons[2].getText() == "X")
+		){
+			xWins(6, 4, 2);
+		}
+		
+		
+		//check O wins Condition
+		if(
+				(buttons[0].getText() == "O")&&
+				(buttons[1].getText() == "O")&&
+				(buttons[2].getText() == "O")
+		){
+			oWins(0, 1, 2);
+		}
+		if(
+				(buttons[3].getText() == "O")&&
+				(buttons[4].getText() == "O")&&
+				(buttons[5].getText() == "O")
+		){
+			oWins(3, 4, 5);
+		}
+		if(
+				(buttons[1].getText() == "O")&&
+				(buttons[4].getText() == "O")&&
+				(buttons[7].getText() == "O")
+		){
+			oWins(1, 4, 7);
+		}
+		if(
+				(buttons[2].getText() == "O")&&
+				(buttons[5].getText() == "O")&&
+				(buttons[8].getText() == "O")
+		){
+			oWins(2, 5, 8);
+		}
+		if(
+				(buttons[6].getText() == "O")&&
+				(buttons[7].getText() == "O")&&
+				(buttons[8].getText() == "O")
+		){
+			oWins(6, 7, 8);
+		}
+		if(
+				(buttons[0].getText() == "O")&&
+				(buttons[3].getText() == "O")&&
+				(buttons[6].getText() == "O")
+		){
+			oWins(0, 3, 6);
+		}
+		if(
+				(buttons[0].getText() == "O")&&
+				(buttons[4].getText() == "O")&&
+				(buttons[8].getText() == "O")
+		){
+			oWins(0, 4, 8);
+		}
+		if(
+				(buttons[6].getText() == "O")&&
+				(buttons[4].getText() == "O")&&
+				(buttons[2].getText() == "O")
+		){
+			oWins(6, 4, 2);
+		}
 		
 	}
 	public void xWins(int a, int b, int c) {
 		
+		buttons[a].setBackground(Color.GREEN);
+		buttons[b].setBackground(Color.GREEN);
+		buttons[c].setBackground(Color.GREEN);
+		
+		
+		
+		for(int i =0; i<9; i++) {
+			buttons[i].setEnabled(false);
+			buttons[i].setOpaque(true);				//fixed issue of turning button blank after game finishes
+		}
+		textfield.setText("X wins");
+		
 	}
-	public void yWins(int a, int b, int c) {
+	public void oWins(int a, int b, int c) {
+		
+		buttons[a].setBackground(Color.GREEN);
+		buttons[b].setBackground(Color.GREEN);
+		buttons[c].setBackground(Color.GREEN);
+		for(int i =0; i<9; i++) {
+			buttons[i].setEnabled(false);
+			buttons[i].setOpaque(true);
+		}
+		textfield.setText("O wins");
 		
 	}
 	
