@@ -56,7 +56,36 @@ public class TicTacToe implements ActionListener{
 		
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		for(int i=0; i<9; i++) {
+			if(e.getSource() == buttons[i]) {
+				/*if(player1_turn ) {
+					buttons[i].setText("X");
+					texfield.setText("O turn ");
+					player1_turn = false;  				//aafule sochera code
+				}
+				else {
+					buttons[i].setText("O");
+					texfield.setText("X turn ");
+					player1_turn = true;
+				}*/
+				if(player1_turn) {
+					if(buttons[i].getText() == "") {
+						buttons[i].setForeground(new Color(255, 0, 0));
+						buttons[i].setText("X");
+						player1_turn = false;
+						texfield.setText("O turn");
+					}
+				}
+				else {
+					if(buttons[i].getText() == "") {
+						buttons[i].setForeground(new Color(0, 255, 0));
+						buttons[i].setText("O");
+						player1_turn = true;
+						texfield.setText("X turn");
+					}
+				}
+			}
+		}
 		
 	}
 	
@@ -70,7 +99,7 @@ public class TicTacToe implements ActionListener{
 		
 		if(random.nextInt(2) == 0) {
 			player1_turn = true;
-			texfield.setText("X turn ");
+			
 		}else {
 			player1_turn = false;
 			texfield.setText("O turn ");
