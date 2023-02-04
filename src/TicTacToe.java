@@ -93,12 +93,15 @@ public class TicTacToe implements ActionListener{
 	}
 	
 	public void firstTurn() {
+		disableButtons();	// Disable the button before Thread.sleep(2000) , otherwise 2 X/O may appear continuously .
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//enable buttons
+		enableButtons();
 		
 		if(random.nextInt(2) == 0) {
 			player1_turn = true;
@@ -107,6 +110,7 @@ public class TicTacToe implements ActionListener{
 			player1_turn = false;
 			textfield.setText("O turn ");
 		}
+		
 			
 	}
 	
@@ -255,6 +259,16 @@ public class TicTacToe implements ActionListener{
 		}
 		textfield.setText("O wins");
 		
+	}
+	public void disableButtons() {
+		for (int i = 0; i < 9; i++) {
+			buttons[i].setEnabled(false);
+		}
+	}
+	public void enableButtons() {
+		for (int i = 0; i < 9; i++) {
+			buttons[i].setEnabled(true);
+		}
 	}
 	
 	
