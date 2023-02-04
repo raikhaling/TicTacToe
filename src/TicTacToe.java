@@ -61,8 +61,21 @@ public class TicTacToe implements ActionListener{
 	}
 	
 	public void firstTurn() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		//random = new Random(2);
+		if(random.nextInt(2) == 0) {
+			player1_turn = true;
+			texfield.setText("X turn ");
+		}else {
+			player1_turn = false;
+			texfield.setText("O turn ");
+		}
+			
 	}
 	
 	public void check() {
